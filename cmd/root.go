@@ -1,6 +1,8 @@
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/spf13/cobra"
 )
 
@@ -13,6 +15,18 @@ var rootCMD = &cobra.Command{
 var (
 	rabbitURI string
 	rabbitEx  string
+
+	asciiArt = `
+ _______ _________          _______  _______ 
+(  ____ )\__   __/|\     /|(  ____ \(  ____ )
+| (    )|   ) (   | )   ( || (    \/| (    )|
+| (____)|   | |   | |   | || (__    | (____)|
+|     __)   | |   ( (   ) )|  __)   |     __)
+| (\ (      | |    \ \_/ / | (      | (\ (   
+| ) \ \_____) (___  \   /  | (____/\| ) \ \__
+|/   \__/\_______/   \_/   (_______/|/   \__/
+
+`
 )
 
 func init() {
@@ -20,6 +34,12 @@ func init() {
 	rootCMD.PersistentFlags().StringVar(&rabbitEx, "rabbit-ex", "exchange1", "RabbitMQ exchange name")
 
 	rootCMD.AddCommand(streamCMD)
+
+	cobra.OnInitialize(configure)
+}
+
+func configure() {
+	fmt.Print(asciiArt)
 }
 
 // Execute executes the root command.
