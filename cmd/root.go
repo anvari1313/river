@@ -12,10 +12,12 @@ var rootCMD = &cobra.Command{
 
 var (
 	rabbitURI string
+	rabbitEx  string
 )
 
 func init() {
 	rootCMD.PersistentFlags().StringVar(&rabbitURI, "rabbit-uri", "amqp://guest:guest@localhost:5672", "RabbitMQ connection URI")
+	rootCMD.PersistentFlags().StringVar(&rabbitEx, "rabbit-ex", "exchange1", "RabbitMQ exchange name")
 
 	rootCMD.AddCommand(streamCMD)
 }
