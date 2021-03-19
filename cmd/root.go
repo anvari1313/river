@@ -16,6 +16,18 @@ var (
 	rabbitURI string
 	rabbitEx  string
 
+	// GitCommit is SHA1 ref of current build
+	GitCommit string
+
+	// GitRef is branch name of current build
+	GitRef string
+
+	// GitRef is branch name of current build
+	GitTag string
+
+	// BuildDate is the timestamp of build
+	BuildDate string
+
 	asciiArt = `
  _______ _________          _______  _______ 
 (  ____ )\__   __/|\     /|(  ____ \(  ____ )
@@ -25,21 +37,21 @@ var (
 | (\ (      | |    \ \_/ / | (      | (\ (   
 | ) \ \_____) (___  \   /  | (____/\| ) \ \__
 |/   \__/\_______/   \_/   (_______/|/   \__/
-
 `
 )
 
 func init() {
+	cobra.OnInitialize(configure)
+
 	rootCMD.PersistentFlags().StringVar(&rabbitURI, "rabbit-uri", "amqp://guest:guest@localhost:5672", "RabbitMQ connection URI")
 	rootCMD.PersistentFlags().StringVar(&rabbitEx, "rabbit-ex", "exchange1", "RabbitMQ exchange name")
 
 	rootCMD.AddCommand(streamCMD)
-
-	cobra.OnInitialize(configure)
 }
 
 func configure() {
 	fmt.Print(asciiArt)
+	fmt.Printf("Build info: %s [%s/%s] @ %s\n\n", GitTag, GitRef, GitCommit, BuildDate)
 }
 
 // Execute executes the root command.
