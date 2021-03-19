@@ -25,7 +25,7 @@ var (
 func init() {
 	streamCMD.PersistentFlags().StringVar(&dbURI, "db-uri", "", "Data store URI")
 	streamCMD.PersistentFlags().StringVar(&db, "db-name", "", "Data store Database")
-	streamCMD.PersistentFlags().StringVar(&collection, "ds-collection", "", "Data store URI")
+	streamCMD.PersistentFlags().StringVar(&collection, "db-col", "", "Data store collection name")
 }
 
 func stream() {
@@ -83,5 +83,7 @@ func stream() {
 			log.WithField("err", err).Error("error in fetching record from data store")
 			continue
 		}
+
+		log.Info("new message published to queue")
 	}
 }
