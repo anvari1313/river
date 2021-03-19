@@ -1,4 +1,4 @@
-name: dockerhub-release-v3.15.0
+name: dockerhub-release
 on:
   # Trigger the workflow on push or pull request,
   # but only for the master branch
