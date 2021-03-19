@@ -12,7 +12,7 @@ COPY go.mod go.sum /src/
 RUN go mod download
 
 COPY . /src
-RUN CGO_ENABLED=0 go build -a -installsuffix cgo
+RUN CGO_ENABLED=0 go build -a -installsuffix cgo -o streamer
 
 FROM alpine:3.11
 
