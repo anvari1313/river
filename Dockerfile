@@ -1,10 +1,5 @@
 FROM golang:1.16-alpine AS build
 
-ARG GIT_BRANCH
-ARG GIT_SHA
-ARG GIT_TAG
-ARG BUILD_TIMESTAMP
-
 ENV GO111MODULE=on \
     GOOS=linux \
     GOARCH=amd64
