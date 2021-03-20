@@ -8,7 +8,7 @@ BUILD_DATE ?= $(shell date +'%Y-%m-%dT%H:%M:%S%z')
 GIT_HEAD_REF := $(shell cat .git/HEAD | cut -d' ' -f2)
 GIT_BRANCH ?= $(shell echo $(GIT_HEAD_REF) | cut -d'/' -f3)
 GIT_SHA ?= $(shell cat .git/$(GIT_HEAD_REF) | head -c 8)
-GIT_TAG ?= $(shell git describe --exact-match $GIT_SHA 2&>/dev/null || echo "v0.0.0")
+GIT_TAG ?= $(shell git describe --abbrev=0 --tags || echo "v0.0.0")
 LDFLAGS := "-w -s \
 	-X $(APP_IMPORT_PATH)/cmd.BuildDate=$(BUILD_DATE)\
 	-X $(APP_IMPORT_PATH)/cmd.GitCommit=$(GIT_SHA) \
